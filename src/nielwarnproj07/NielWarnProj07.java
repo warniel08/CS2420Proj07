@@ -16,16 +16,16 @@ public class NielWarnProj07 {
     public static void main(String[] args) {
         // variables start and end for measuring the time it takes to run sort
         long start, end;
-        int sizeOfArray;
-        boolean again;
-        Scanner userChoice = new Scanner(System.in);
+        int sizeOfArray; // keep track of array size
+        boolean again; // boolean used for userChoice if they want to run the program again
+        Scanner userChoice = new Scanner(System.in); // new Scanner to populate again variable
         
         do {    
             sizeOfArray = createArraySize();
             // create new random number assignment
             Random randomNum = new Random();
 
-            // initialize arrays with Size OF Array
+            // initialize arrays with sizeOfArray variable 
             Integer[] origNumsArray = new Integer[sizeOfArray];
             Integer[] selectionSortArr;
             Integer[] bubbleSortArr;
@@ -33,7 +33,7 @@ public class NielWarnProj07 {
             Integer[] mergeSortArr;
             Integer[] quickSortArr;
 
-            // fill original array with random numbers that range from 0 - Size of array
+            // fill original array with random numbers that range from 0 - size of array
             for (int i = 0; i < sizeOfArray; i++) {
                 origNumsArray[i] = randomNum.nextInt(sizeOfArray);
             }
@@ -57,7 +57,7 @@ public class NielWarnProj07 {
             
             System.out.print("Would you like to run this again with a different number of items?(y/n) ");
             
-            again = runAgain(userChoice.next());
+            again = runAgain(); // get users choice and store in again variable
         } while (again);
     }
     
@@ -93,8 +93,19 @@ public class NielWarnProj07 {
         System.out.println("");
     }
     
-    public static boolean runAgain(String choice) {
-            return choice.toLowerCase().equals("y");
+    public static boolean runAgain() {
+        Scanner input = new Scanner(System.in);
+        String userChoice = input.next();
+        while (!userChoice.equalsIgnoreCase("y") && !userChoice.equalsIgnoreCase("n")) {
+            System.out.print("Invalide response. Try again(y/n): ");
+            userChoice = input.next();
+        }
+        if (userChoice.equalsIgnoreCase("n")) {
+            System.out.println("Come back next time.");
+            return false;
+        } else {
+            return userChoice.equalsIgnoreCase("y");
+        }
     }
 
     public static <T extends Comparable<? super T>>
