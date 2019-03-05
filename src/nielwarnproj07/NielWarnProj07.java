@@ -1,6 +1,9 @@
 /*
     This program displays the running time of the selection,
-    bubble, insertion, merge, and quick sorts.
+    bubble, insertion, merge, and quick sorts. It also allows
+    the user to select how many integers to sort in an array.
+    It will ask the user if it wants to run the program again.
+
     Warner Nielsen
     3/4/19
     Project 07
@@ -14,11 +17,10 @@ import java.util.*;
 public class NielWarnProj07 {
 
     public static void main(String[] args) {
-        // variables start and end for measuring the time it takes to run sort
-        long start, end;
         int sizeOfArray; // keep track of array size
         boolean again; // boolean used for userChoice if they want to run the program again
-        Scanner userChoice = new Scanner(System.in); // new Scanner to populate again variable
+        
+        System.out.println("Welcome to the Sort Methods Timer");
         
         do {    
             sizeOfArray = createArraySize();
@@ -27,9 +29,8 @@ public class NielWarnProj07 {
 
             // initialize arrays with sizeOfArray variable 
             Integer[] origNumsArray = new Integer[sizeOfArray];
-            Integer[] selectionSortArr;
-            Integer[] bubbleSortArr;
-            Integer[] insertionSortArr;
+            
+            
             Integer[] mergeSortArr;
             Integer[] quickSortArr;
 
@@ -39,26 +40,101 @@ public class NielWarnProj07 {
             }
 
             // display the first 10 nums from array before it's sorted
+            System.out.print("\nUnsorted Array: ");
             displayArray(origNumsArray);
-
-            // copy original array to sort array
-            selectionSortArr = copyArray(origNumsArray);
-            // assign to start the current time in milliseconds
-            start = System.currentTimeMillis();
-            // run the sort algorithm
-            selectionSort(selectionSortArr, sizeOfArray);
-            // assign to end the current time in milliseconds after the sort method
-            end = System.currentTimeMillis();
-            // display the amount of time it took to sort the array by subtracting start from end
-            System.out.println("\nThis sort took: " + (end-start) + " milliseconds.\n");
-
-            // display the first 10 nums from the array after it's sorted
-            displayArray(selectionSortArr);
+            
+            
+            
+            
+            mergeSortArr = copyArray(origNumsArray);
+            quickSortArr = copyArray(origNumsArray);
+            
+            // Run the sort methods each using the Original Array of Numbers
+            runSelectionSort(origNumsArray);
+            runBubbleSort(origNumsArray);
             
             System.out.print("Would you like to run this again with a different number of items?(y/n) ");
             
             again = runAgain(); // get users choice and store in again variable
         } while (again);
+    }
+    
+    public static void runSelectionSort(Integer[] originalArr) {
+        // variables start and end for measuring the time it takes to run sort
+        long start, end, totalTime;
+        Integer[] selectionSortArr;
+        
+        System.out.println("\nStats for Selection Sort:");
+        
+        // copy original array to sort arrays
+        selectionSortArr = copyArray(originalArr);
+        
+        // assign to start the current time in milliseconds
+        start = System.currentTimeMillis();
+        // run the sort algorithm
+        selectionSort(selectionSortArr, selectionSortArr.length);
+        // assign to end the current time in milliseconds after the sort method
+        end = System.currentTimeMillis();
+        // calculate totalTime
+        totalTime = (end-start);
+        // display the amount of time it took to sort the array
+        System.out.println("The Selection Sort took " + totalTime + " milliseconds to sort.");
+        
+        // display the first 10 nums from the array after it's sorted
+        System.out.print("Sorted Array: ");
+        displayArray(selectionSortArr);
+    }
+    
+    public static void runBubbleSort(Integer[] originalArr) {
+        // variables start and end for measuring the time it takes to run sort
+        long start, end, totalTime;
+        Integer[] bubbleSortArr;
+        
+        System.out.println("\nStats for Bubble Sort:");
+        
+        // copy original array to sort arrays
+        bubbleSortArr = copyArray(originalArr);
+        
+        // assign to start the current time in milliseconds
+        start = System.currentTimeMillis();
+        // run the sort algorithm
+        bubbleSort(bubbleSortArr, bubbleSortArr.length);
+        // assign to end the current time in milliseconds after the sort method
+        end = System.currentTimeMillis();
+        // calculate totalTime
+        totalTime = (end-start);
+        // display the amount of time it took to sort the array
+        System.out.println("The Bubble Sort took " + totalTime + " milliseconds to sort.");
+        
+        // display the first 10 nums from the array after it's sorted
+        System.out.print("Sorted Array: ");
+        displayArray(bubbleSortArr);
+    }
+    
+    public static void runInsertionSort(Integer[] originalArr) {
+        // variables start and end for measuring the time it takes to run sort
+        long start, end, totalTime;
+        Integer[] insertionSortArr;
+        
+        System.out.println("\nStats for Insertion Sort:");
+        
+        // copy original array to sort arrays
+        insertionSortArr = copyArray(originalArr);
+        
+        // assign to start the current time in milliseconds
+        start = System.currentTimeMillis();
+        // run the sort algorithm
+        insertionSort(insertionSortArr, insertionSortArr.length);
+        // assign to end the current time in milliseconds after the sort method
+        end = System.currentTimeMillis();
+        // calculate totalTime
+        totalTime = (end-start);
+        // display the amount of time it took to sort the array
+        System.out.println("The Bubble Sort took " + totalTime + " milliseconds to sort.");
+        
+        // display the first 10 nums from the array after it's sorted
+        System.out.print("Sorted Array: ");
+        displayArray(bubbleSortArr);
     }
     
     public static int createArraySize() {
@@ -101,7 +177,7 @@ public class NielWarnProj07 {
             userChoice = input.next();
         }
         if (userChoice.equalsIgnoreCase("n")) {
-            System.out.println("Come back next time.");
+            System.out.println("Come back again.");
             return false;
         } else {
             return userChoice.equalsIgnoreCase("y");
