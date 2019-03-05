@@ -22,12 +22,13 @@ public class NielWarnProj07 {
         
         System.out.println("Welcome to the Sort Methods Timer Program");
         
-        do {    
+        do {
+            // give sizeOfArray it's size using user input found in createArraySize() method
             sizeOfArray = createArraySize();
             // create new random number assignment
             Random randomNum = new Random();
 
-            // initialize arrays with sizeOfArray variable 
+            // initialize origNumsArray with sizeOfArray variable 
             Integer[] origNumsArray = new Integer[sizeOfArray];
   
             // fill original array with random numbers that range from 0 - size of array
@@ -39,7 +40,7 @@ public class NielWarnProj07 {
             System.out.print("\nUnsorted Array: ");
             displayArray(origNumsArray);
        
-            // Run the each sort method using the origNumbersArray
+            // Run each sort method using the origNumbersArray
             runSelectionSort(origNumsArray);
             runBubbleSort(origNumsArray);
             runInsertionSort(origNumsArray);
@@ -218,8 +219,9 @@ public class NielWarnProj07 {
         Scanner input = new Scanner(System.in);
         String userChoice = input.next();
         while (!userChoice.equalsIgnoreCase("y") && !userChoice.equalsIgnoreCase("n")) {
-            System.out.print("Invalide response. Try again(y/n): ");
+            System.out.print("Invalid response. Try again(y/n): ");
             userChoice = input.next();
+            System.out.println("");
         }
         if (userChoice.equalsIgnoreCase("n")) {
             System.out.println("Come back again.");
