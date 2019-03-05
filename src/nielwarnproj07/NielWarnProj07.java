@@ -17,37 +17,21 @@ public class NielWarnProj07 {
         // variables start and end for measuring the time it takes to run sort
         long start, end;
         int sizeOfArray;
-        boolean again = false;
+        boolean again;
+        Scanner userChoice = new Scanner(System.in);
         
-        // get user input for how many numbers to store in the array
-        Scanner userInput = new Scanner(System.in);
-        
-        do {
-            System.out.print("Please enter how many numbers you would like to sort: ");
-            while (!userInput.hasNextInt()) {
-                System.out.println("Sorry, try again...");
-                System.out.print("Please enter how many numbers you would like to sort: ");
-                userInput.next();
-            }
-            
-            while (userInput.nextInt() < 10) {
-                System.out.println("Sorry, try again...");
-                System.out.print("Please enter how many numbers you would like to sort: ");
-                userInput.next();
-            }
-            
-            sizeOfArray = userInput.nextInt();
-            
-            // create new random number
+        do {    
+            sizeOfArray = createArraySize();
+            // create new random number assignment
             Random randomNum = new Random();
 
             // initialize arrays with Size OF Array
             Integer[] origNumsArray = new Integer[sizeOfArray];
-            Integer[] selectionSortArr = new Integer[sizeOfArray];
-            Integer[] bubbleSortArr = new Integer[sizeOfArray];
-            Integer[] insertionSortArr = new Integer[sizeOfArray];
-            Integer[] mergeSortArr = new Integer[sizeOfArray];
-            Integer[] quickSortArr = new Integer[sizeOfArray];
+            Integer[] selectionSortArr;
+            Integer[] bubbleSortArr;
+            Integer[] insertionSortArr;
+            Integer[] mergeSortArr;
+            Integer[] quickSortArr;
 
             // fill original array with random numbers that range from 0 - Size of array
             for (int i = 0; i < sizeOfArray; i++) {
@@ -59,20 +43,39 @@ public class NielWarnProj07 {
 
             // copy original array to sort array
             selectionSortArr = copyArray(origNumsArray);
-    //            System.out.println("Is origArray == to selectionSortArr: " + (selectionSortArr == origNumsArray));
             // assign to start the current time in milliseconds
             start = System.currentTimeMillis();
             // run the sort algorithm
-            selectionSort(origNumsArray, sizeOfArray);
+            selectionSort(selectionSortArr, sizeOfArray);
             // assign to end the current time in milliseconds after the sort method
             end = System.currentTimeMillis();
             // display the amount of time it took to sort the array by subtracting start from end
             System.out.println("\nThis sort took: " + (end-start) + " milliseconds.\n");
 
             // display the first 10 nums from the array after it's sorted
-            displayArray(origNumsArray);
-        } while (userInput.nextInt() < 10);
-//        } while (!again);
+            displayArray(selectionSortArr);
+            
+            System.out.print("Would you like to run this again with a different number of items?(y/n) ");
+            
+            again = runAgain(userChoice.next());
+        } while (again);
+    }
+    
+    public static int createArraySize() {
+        int arraySize;
+        // get user input for how many numbers to store in the array
+        Scanner userInput = new Scanner(System.in);
+        
+        do {
+            System.out.print("Please enter how many numbers you would like to sort (10 or more): ");
+            while (!userInput.hasNextInt()) {
+                System.out.println("Sorry, that's not an integer...");
+                System.out.print("Please enter how many numbers you would like to sort (10 or more): ");
+                userInput.next();
+            }
+            arraySize = userInput.nextInt();
+        } while (arraySize < 10);
+        return arraySize;
     }
     
     public static Integer[] copyArray(Integer[] arrayToCopy) {
@@ -88,6 +91,10 @@ public class NielWarnProj07 {
             System.out.print(array[i] + " ");
         }
         System.out.println("");
+    }
+    
+    public static boolean runAgain(String choice) {
+            return choice.toLowerCase().equals("y");
     }
 
     public static <T extends Comparable<? super T>>
