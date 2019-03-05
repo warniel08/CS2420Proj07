@@ -47,8 +47,6 @@ public class NielWarnProj07 {
             runMergeSort(origNumsArray);
             runQuickSort(origNumsArray);
             
-            System.out.print("\nWould you like to run this again with a different number of items?(y/n) ");
-            
             again = runAgain(); // get users choice and store in again variable
         } while (again);
     }
@@ -65,7 +63,7 @@ public class NielWarnProj07 {
         
         // assign to start the current time in milliseconds
         start = System.currentTimeMillis();
-        // run the sort algorithm
+        // run the sort algorithm using the selectionSort array and its length
         selectionSort(selectionSortArr, selectionSortArr.length);
         // assign to end the current time in milliseconds after the sort method
         end = System.currentTimeMillis();
@@ -91,7 +89,7 @@ public class NielWarnProj07 {
         
         // assign to start the current time in milliseconds
         start = System.currentTimeMillis();
-        // run the sort algorithm
+        // run the sort algorithm using the bubbleSort Array and its length
         bubbleSort(bubbleSortArr, bubbleSortArr.length);
         // assign to end the current time in milliseconds after the sort method
         end = System.currentTimeMillis();
@@ -117,7 +115,7 @@ public class NielWarnProj07 {
         
         // assign to start the current time in milliseconds
         start = System.currentTimeMillis();
-        // run the sort algorithm
+        // run the sort algorithm using the insertionArray and its length
         insertionSort(insertionSortArr, insertionSortArr.length);
         // assign to end the current time in milliseconds after the sort method
         end = System.currentTimeMillis();
@@ -143,7 +141,7 @@ public class NielWarnProj07 {
         
         // assign to start the current time in milliseconds
         start = System.currentTimeMillis();
-        // run the sort algorithm
+        // run the sort algorithm using the mergeSort Array
         mergesort(mergeSortArr);
         // assign to end the current time in milliseconds after the sort method
         end = System.currentTimeMillis();
@@ -169,7 +167,7 @@ public class NielWarnProj07 {
         
         // assign to start the current time in milliseconds
         start = System.currentTimeMillis();
-        // run the sort algorithm
+        // run the sort algorithm using the array and a starting and ending value
         quickSort(quickSortArr, 0, quickSortArr.length-1);
         // assign to end the current time in milliseconds after the sort method
         end = System.currentTimeMillis();
@@ -183,6 +181,14 @@ public class NielWarnProj07 {
         displayArray(quickSortArr);
     }
     
+    /*
+        Method to create the size for the original array. All other
+        arrays are based off this size when the original array is
+        used in copyArray(). It validates for non integer user input,
+        and it also limits the user to select an integer value of 10
+        or more. It takes no parameters and it returns an integer
+        value to be stored in size.
+    */
     public static int createArraySize() {
         int arraySize;
         // get user input for how many numbers to store in the array
@@ -200,6 +206,11 @@ public class NielWarnProj07 {
         return arraySize;
     }
     
+    /*
+        Method to copy one array to another. It takes in the array
+        to copy. It creates a new array and returns the new array
+        with the copied values from the original array.
+    */
     public static Integer[] copyArray(Integer[] arrayToCopy) {
         Integer[] newArray = new Integer[arrayToCopy.length];
         for (int i = 0; i < arrayToCopy.length; i++) {
@@ -208,6 +219,11 @@ public class NielWarnProj07 {
         return newArray;
     }
     
+    /*
+        Method to print out the values of an array
+        in order. It takes in an array and doesn't
+        return any value.
+    */
     public static void displayArray(Integer[] array) {
         for (int i = 0; i < 10; i++) {
             System.out.print(array[i] + " ");
@@ -215,7 +231,14 @@ public class NielWarnProj07 {
         System.out.println("");
     }
     
+    /*
+        Method to ask the user if they want to run the entire program again.
+        It will get the userChoice and validate if it's anything other than
+        y or n. If y it will run the program again. If n it will end the program.
+        It takes no parameters and returns a boolean value.
+    */
     public static boolean runAgain() {
+        System.out.print("\nWould you like to run this again with a different number of items?(y/n) ");
         Scanner input = new Scanner(System.in);
         String userChoice = input.next();
         while (!userChoice.equalsIgnoreCase("y") && !userChoice.equalsIgnoreCase("n")) {
