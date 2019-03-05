@@ -20,7 +20,7 @@ public class NielWarnProj07 {
         int sizeOfArray; // keep track of array size
         boolean again; // boolean used for userChoice if they want to run the program again
         
-        System.out.println("Welcome to the Sort Methods Timer");
+        System.out.println("Welcome to the Sort Methods Timer Program");
         
         do {    
             sizeOfArray = createArraySize();
@@ -29,11 +29,7 @@ public class NielWarnProj07 {
 
             // initialize arrays with sizeOfArray variable 
             Integer[] origNumsArray = new Integer[sizeOfArray];
-            
-            
-            Integer[] mergeSortArr;
-            Integer[] quickSortArr;
-
+  
             // fill original array with random numbers that range from 0 - size of array
             for (int i = 0; i < sizeOfArray; i++) {
                 origNumsArray[i] = randomNum.nextInt(sizeOfArray);
@@ -42,18 +38,15 @@ public class NielWarnProj07 {
             // display the first 10 nums from array before it's sorted
             System.out.print("\nUnsorted Array: ");
             displayArray(origNumsArray);
-            
-            
-            
-            
-            mergeSortArr = copyArray(origNumsArray);
-            quickSortArr = copyArray(origNumsArray);
-            
-            // Run the sort methods each using the Original Array of Numbers
+       
+            // Run the each sort method using the origNumbersArray
             runSelectionSort(origNumsArray);
             runBubbleSort(origNumsArray);
+            runInsertionSort(origNumsArray);
+            runMergeSort(origNumsArray);
+            runQuickSort(origNumsArray);
             
-            System.out.print("Would you like to run this again with a different number of items?(y/n) ");
+            System.out.print("\nWould you like to run this again with a different number of items?(y/n) ");
             
             again = runAgain(); // get users choice and store in again variable
         } while (again);
@@ -130,11 +123,63 @@ public class NielWarnProj07 {
         // calculate totalTime
         totalTime = (end-start);
         // display the amount of time it took to sort the array
-        System.out.println("The Bubble Sort took " + totalTime + " milliseconds to sort.");
+        System.out.println("The Insertion Sort took " + totalTime + " milliseconds to sort.");
         
         // display the first 10 nums from the array after it's sorted
         System.out.print("Sorted Array: ");
-        displayArray(bubbleSortArr);
+        displayArray(insertionSortArr);
+    }
+    
+    public static void runMergeSort(Integer[] originalArr) {
+        // variables start and end for measuring the time it takes to run sort
+        long start, end, totalTime;
+        Integer[] mergeSortArr;
+        
+        System.out.println("\nStats for Merge Sort:");
+        
+        // copy original array to sort arrays
+        mergeSortArr = copyArray(originalArr);
+        
+        // assign to start the current time in milliseconds
+        start = System.currentTimeMillis();
+        // run the sort algorithm
+        mergesort(mergeSortArr);
+        // assign to end the current time in milliseconds after the sort method
+        end = System.currentTimeMillis();
+        // calculate totalTime
+        totalTime = (end-start);
+        // display the amount of time it took to sort the array
+        System.out.println("The Merge Sort took " + totalTime + " milliseconds to sort.");
+        
+        // display the first 10 nums from the array after it's sorted
+        System.out.print("Sorted Array: ");
+        displayArray(mergeSortArr);
+    }
+    
+    public static void runQuickSort(Integer[] originalArr) {
+        // variables start and end for measuring the time it takes to run sort
+        long start, end, totalTime;
+        Integer[] quickSortArr;
+        
+        System.out.println("\nStats for Quick Sort:");
+        
+        // copy original array to sort arrays
+        quickSortArr = copyArray(originalArr);
+        
+        // assign to start the current time in milliseconds
+        start = System.currentTimeMillis();
+        // run the sort algorithm
+        quickSort(quickSortArr, 0, quickSortArr.length-1);
+        // assign to end the current time in milliseconds after the sort method
+        end = System.currentTimeMillis();
+        // calculate totalTime
+        totalTime = (end-start);
+        // display the amount of time it took to sort the array
+        System.out.println("The Quick Sort took " + totalTime + " milliseconds to sort.");
+        
+        // display the first 10 nums from the array after it's sorted
+        System.out.print("Sorted Array: ");
+        displayArray(quickSortArr);
     }
     
     public static int createArraySize() {
