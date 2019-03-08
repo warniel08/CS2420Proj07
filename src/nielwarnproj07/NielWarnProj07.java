@@ -224,7 +224,8 @@ public class NielWarnProj07 {
         in order. It takes in an array and doesn't
         return any value.
     */
-    public static void displayArray(Integer[] array) {
+    public static <T extends Comparable<? super T>>
+         void displayArray(T[] array) {
         for (int i = 0; i < 10; i++) {
             System.out.print(array[i] + " ");
         }
@@ -474,7 +475,28 @@ public class NielWarnProj07 {
     // Precondition: theArray[first..last] where first <= last.
     // Postcondition: theArray[first] is the pivot.
     // ---------------------------------------------------------
-    // Implementation left as an exercise.
+        T indexFirst, indexMid, indexLast;
+        
+        // mid used to find the mdidle value of the array by taking the array length and dividing by 2
+        int mid = theArray.length/2;
+        
+        // these are temp indexes used for the swapping in the array
+        indexFirst = theArray[first];
+        indexMid = theArray[mid];
+        indexLast = theArray[last];
+        
+        // checks if mid < first && if mid < last, if so it swaps mid and first
+        if (indexMid.compareTo(indexFirst) < 0 && indexMid.compareTo(indexLast) < 0) {
+            theArray[first] = indexMid;
+            theArray[mid] = indexFirst;
+        // else if last < first && last < mid, swap first and last
+        } else if (indexLast.compareTo(indexFirst) < 0 && indexLast.compareTo(indexMid) < 0) {
+            theArray[first] = indexLast;
+            theArray[last] = indexFirst;
+        // otherwise keep first where it is
+        } else {
+            theArray[first] = indexFirst;
+        }
     }  // end choosePivot
 
     private static <T extends Comparable<? super T>>
