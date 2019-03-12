@@ -486,11 +486,13 @@ public class NielWarnProj07 {
         indexLast = theArray[last];
         
         // checks if mid < first && if mid < last, if so it swaps mid and first
-        if (indexMid.compareTo(indexFirst) < 0 && indexMid.compareTo(indexLast) < 0) {
+        if ((indexMid.compareTo(indexFirst) < 0 && indexMid.compareTo(indexLast) > 0) || 
+                (indexMid.compareTo(indexFirst) > 0 && indexMid.compareTo(indexLast) < 0)) {
             theArray[first] = indexMid;
             theArray[mid] = indexFirst;
         // else if last < first && last < mid, swap first and last
-        } else if (indexLast.compareTo(indexFirst) < 0 && indexLast.compareTo(indexMid) < 0) {
+        } else if ((indexLast.compareTo(indexFirst) < 0 && indexLast.compareTo(indexMid) > 0) || 
+                (indexLast.compareTo(indexFirst) > 0 && indexLast.compareTo(indexMid) < 0)) {
             theArray[first] = indexLast;
             theArray[last] = indexFirst;
         // otherwise keep first where it is
